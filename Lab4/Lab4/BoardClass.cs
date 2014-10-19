@@ -56,10 +56,10 @@ namespace Lab4
                         fmt.LineAlignment = StringAlignment.Center;
                         if (boardArray[i, j].isWhite() || hintsOn) {
                             
-                            g.DrawString("Q", new Font("Arial", 30), Brushes.Black, boardArray[i, j].getRect(),
+                            g.DrawString("Q", new Font("Arial", 30, FontStyle.Bold), Brushes.Black, boardArray[i, j].getRect(),
                                 fmt);
                         } else {
-                            g.DrawString("Q", new Font("Arial", 30), Brushes.White, boardArray[i, j].getRect(),
+                            g.DrawString("Q", new Font("Arial", 30, FontStyle.Bold), Brushes.White, boardArray[i, j].getRect(),
                                 fmt);
                         }
                     }
@@ -140,6 +140,7 @@ namespace Lab4
                             boardArray[column, row].addQueen();
                             if (queensOnBoard == 8) {
                                 // Display success message
+                                System.Windows.Forms.MessageBox.Show("You did it!");
                             }
                         }
                     } else {
