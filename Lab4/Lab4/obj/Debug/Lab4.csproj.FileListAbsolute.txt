@@ -1,0 +1,9 @@
+C:\Users\Kevin\Documents\Visual Studio 2013\Projects\EC447\Lab4\Lab4\bin\Debug\Lab4.exe.config
+C:\Users\Kevin\Documents\Visual Studio 2013\Projects\EC447\Lab4\Lab4\obj\Debug\Lab4.Properties.Resources.resources
+C:\Users\Kevin\Documents\Visual Studio 2013\Projects\EC447\Lab4\Lab4\obj\Debug\Lab4.csproj.GenerateResource.Cache
+C:\Users\Kevin\Documents\Visual Studio 2013\Projects\EC447\Lab4\Lab4\bin\Debug\Lab4.exe
+C:\Users\Kevin\Documents\Visual Studio 2013\Projects\EC447\Lab4\Lab4\bin\Debug\Lab4.pdb
+C:\Users\Kevin\Documents\Visual Studio 2013\Projects\EC447\Lab4\Lab4\obj\Debug\Lab4.exe
+C:\Users\Kevin\Documents\Visual Studio 2013\Projects\EC447\Lab4\Lab4\obj\Debug\Lab4.pdb
+C:\Users\Kevin\Documents\Visual Studio 2013\Projects\EC447\Lab4\Lab4\obj\Debug\Lab4.Form1.resources
+C:\Users\Kevin\Documents\Visual Studio 2013\Projects\EC447\Lab4\Lab4\obj\Debug\Lab4.csprojResolveAssemblyReference.cache

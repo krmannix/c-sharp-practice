@@ -1,0 +1,6 @@
+C:\Users\Kevin\Documents\Visual Studio 2013\Projects\EC447\Lab2 - Copy\Lab2\bin\Debug\Lab2.exe.config
+C:\Users\Kevin\Documents\Visual Studio 2013\Projects\EC447\Lab2 - Copy\Lab2\obj\Debug\Lab2.exe
+C:\Users\Kevin\Documents\Visual Studio 2013\Projects\EC447\Lab2 - Copy\Lab2\obj\Debug\Lab2.pdb
+C:\Users\Kevin\Documents\Visual Studio 2013\Projects\EC447\Lab3\Lab2\bin\Debug\Lab2.exe.config
+C:\Users\Kevin\Documents\Visual Studio 2013\Projects\EC447\Lab3\Lab2\obj\Debug\Lab2.exe
+C:\Users\Kevin\Documents\Visual Studio 2013\Projects\EC447\Lab3\Lab2\obj\Debug\Lab2.pdb

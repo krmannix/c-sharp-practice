@@ -1,0 +1,9 @@
+C:\Users\Kevin\Documents\Visual Studio 2013\Projects\EC447\Lab1_CSharp\Lab1_CSharp\bin\Debug\Lab1_CSharp.exe.config
+C:\Users\Kevin\Documents\Visual Studio 2013\Projects\EC447\Lab1_CSharp\Lab1_CSharp\bin\Debug\Lab1_CSharp.exe
+C:\Users\Kevin\Documents\Visual Studio 2013\Projects\EC447\Lab1_CSharp\Lab1_CSharp\bin\Debug\Lab1_CSharp.pdb
+C:\Users\Kevin\Documents\Visual Studio 2013\Projects\EC447\Lab1_CSharp\Lab1_CSharp\obj\Debug\Lab1_CSharp.csprojResolveAssemblyReference.cache
+C:\Users\Kevin\Documents\Visual Studio 2013\Projects\EC447\Lab1_CSharp\Lab1_CSharp\obj\Debug\Lab1_CSharp.Form1.resources
+C:\Users\Kevin\Documents\Visual Studio 2013\Projects\EC447\Lab1_CSharp\Lab1_CSharp\obj\Debug\Lab1_CSharp.Properties.Resources.resources
+C:\Users\Kevin\Documents\Visual Studio 2013\Projects\EC447\Lab1_CSharp\Lab1_CSharp\obj\Debug\Lab1_CSharp.csproj.GenerateResource.Cache
+C:\Users\Kevin\Documents\Visual Studio 2013\Projects\EC447\Lab1_CSharp\Lab1_CSharp\obj\Debug\Lab1_CSharp.exe
+C:\Users\Kevin\Documents\Visual Studio 2013\Projects\EC447\Lab1_CSharp\Lab1_CSharp\obj\Debug\Lab1_CSharp.pdb
