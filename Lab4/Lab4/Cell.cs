@@ -13,10 +13,12 @@ namespace Lab4
         bool red;
         bool white;
         Rectangle rect;
+        bool safe;
 
         public Cell() {
             this.white = false;
-            this.red = false;   
+            this.red = false;
+            this.safe = true;
         }
 
         public Brush getColor() {
@@ -67,5 +69,16 @@ namespace Lab4
             return this.queen;
         }
 
+        public void setSafe() {
+            this.safe = true;
+        }
+
+        public void setNotSafe() {
+            this.safe = false;
+        }
+
+        public bool isSafe() {
+            return this.safe;
+        }
     }
 }

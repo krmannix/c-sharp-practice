@@ -31,6 +31,9 @@ namespace Lab4
             this.g = g;
         }
 
+        public int numQueens() {
+            return this.queensOnBoard;
+        }
 
         public void toggleHints() {
             this.hintsOn = !this.hintsOn;
@@ -41,6 +44,7 @@ namespace Lab4
         }
 
         public void allDraw() {
+            getSafeBoxes();
             getHintBoard();
             for (int i = 0; i < this.arraySize; i++) {
                 for (int j = 0; j < this.arraySize; j++) {
@@ -50,11 +54,12 @@ namespace Lab4
                         StringFormat fmt = new StringFormat();
                         fmt.Alignment = StringAlignment.Center;
                         fmt.LineAlignment = StringAlignment.Center;
-                        if (boardArray[i, j].isWhite()) {
-                            g.DrawString("Q", new Font("Arial", 16), Brushes.Black, boardArray[i, j].getRect(),
+                        if (boardArray[i, j].isWhite() || hintsOn) {
+                            
+                            g.DrawString("Q", new Font("Arial", 30), Brushes.Black, boardArray[i, j].getRect(),
                                 fmt);
                         } else {
-                            g.DrawString("Q", new Font("Arial", 16), Brushes.White, boardArray[i, j].getRect(),
+                            g.DrawString("Q", new Font("Arial", 30), Brushes.White, boardArray[i, j].getRect(),
                                 fmt);
                         }
                     }
@@ -94,31 +99,12 @@ namespace Lab4
             }
         }
 
-        public void getHintBoard() {
-            if (hintsOn) {
-                for (int i = 0; i < arraySize; i++) {
-                    for (int j = 0; j < arraySize; j++) {
-                        if (!isSafe(i, j)) {
-                            boardArray[i, j].setRed();
-                        } else {
-                            boardArray[i, j].setNotRed();
-                        }
-                    }
-                }
-
-            }
-        }
-
-        
-
         public int[] getSquare(int x, int y) {
             x -= 100; y -= 100;
             int column = (x / 50);
             int row = (y / 50);
-            Console.WriteLine("x is " + x + " column is " + column);
-            Console.WriteLine("y is " + y + " row is " + row);
             if (0 <= row && row < 8 && 0 <= column && column < 8) {
-                return new int[] {column, row};
+                return new int[] {row, column};
             } else {
                 return new int[] {-1, -1};
             }
@@ -129,29 +115,27 @@ namespace Lab4
             for (int i = 0; i < arraySize; i++) {
                 for (int j = 0; j < arraySize; j++) {
                     boardArray[i, j].removeQueen();
+                    boardArray[i, j].setNotRed();
                 }
             }
         }
 
         public void clickOnBoard(int x, int y, bool leftClick) {
-            Console.WriteLine("clickOnBoard");
             int[] box = getSquare(x, y);
             int column = box[0], row = box[1];
             if (column != -1) { // Means they clicked on the board
                 if (boardArray[column, row].hasQueen()) {
                     if (leftClick) {
-                        Console.WriteLine("Pre existing");
                         System.Media.SystemSounds.Beep.Play();
                     } else {
-                        Console.WriteLine("Remove Queen");
                         queensOnBoard--;
                         boardArray[column, row].removeQueen();
                     }
+                } else if (!leftClick) {
+                    // Ignore the right clicks
                 } else {
-                    if (isSafe(column, row)) {
-                        Console.WriteLine("Safe");
+                    if (boardArray[column, row].isSafe()) {
                         if (queensOnBoard < 8) {
-                            Console.WriteLine("Draw Queen");
                             queensOnBoard++;
                             boardArray[column, row].addQueen();
                             if (queensOnBoard == 8) {
@@ -159,7 +143,6 @@ namespace Lab4
                             }
                         }
                     } else {
-                        Console.WriteLine("4th case");
                         System.Media.SystemSounds.Beep.Play();
                     }
                 }
@@ -168,15 +151,95 @@ namespace Lab4
             }
         }
 
-        public bool isSafe(int column, int row) {
-            for (int i = 0; i <= column; i++)
-            {
-                if (boardArray[i, row].hasQueen() || (i <= row && boardArray[column - i, row - i].hasQueen()) || (row + i < 8 && boardArray[column - i, row + i].hasQueen()))
-                {
-                    return false;
+        public void getSafeBoxes() {
+            for (int i = 0; i < this.arraySize; i++) {
+                for (int j = 0; j < this.arraySize; j++) {
+                    if (queenInRow(i) || queenInColumn(j) || queenInDiag1(i, j)
+                        || queenInDiag2(i, j) || queenInDiag3(i, j) || queenInDiag4(i, j))
+                    {
+                        boardArray[i, j].setNotSafe();
+                    }
+                    else
+                    {
+                        boardArray[i, j].setSafe();
+                    }
                 }
             }
-            return true;
+        }
+
+        // All the queen checking methods are below
+
+        public bool queenInRow(int i) {
+            for (int j = 0; j < this.arraySize; j++) {
+                if (boardArray[i, j].hasQueen()) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public bool queenInColumn(int j) {
+            for (int i = 0; i < this.arraySize; i++) {
+                if (boardArray[i, j].hasQueen()) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public bool queenInDiag1(int i, int j) {
+            while (i-- > 0 && j-- > 0) {
+                if (boardArray[i, j].hasQueen()) return true;
+            }
+            return false;
+        }
+
+        public bool queenInDiag2(int i, int j) {
+            while (i-- > 0 && j++ < 7)
+            {
+                if (boardArray[i, j].hasQueen()) return true;
+            }
+            return false;
+        }
+
+        public bool queenInDiag3(int i, int j)
+        {
+            while (j-- > 0 && i++ < 7)
+            {
+                if (boardArray[i, j].hasQueen()) return true;
+            }
+            return false;
+        }
+
+        public bool queenInDiag4(int i, int j)
+        {
+            while (i++ < 7 && j++ < 7)
+            {
+                if (boardArray[i, j].hasQueen()) return true;
+            }
+            return false;
+        }
+
+        public void getHintBoard() {
+            if (hintsOn) {
+                for (int i = 0; i < arraySize; i++) { 
+                    for (int j = 0; j < arraySize; j++) {
+                        if (!boardArray[i, j].isSafe()) {
+                            boardArray[i, j].setRed();
+                        } else {
+                            boardArray[i, j].setNotRed();
+                        }
+                    }
+                }
+            }
+            else {
+                for (int i = 0; i < arraySize; i++) {
+                    for (int j = 0; j < arraySize; j++) {
+
+                         boardArray[i, j].setNotRed();
+                    }
+                }
+            }
         }
     }
 }
