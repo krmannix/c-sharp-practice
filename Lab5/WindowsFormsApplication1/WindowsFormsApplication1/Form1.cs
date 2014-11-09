@@ -192,6 +192,7 @@ namespace WindowsFormsApplication1
             }
             else
             {
+                Console.WriteLine("CLIKED TWICE");
                 x2 = MousePosition.X;
                 y2 = MousePosition.Y;
                 drawObjs.Add(new DrawObjects(x1, y1, x2, y2, penState, fillState, drawState, penWidth, text, fill, outline));
@@ -203,6 +204,7 @@ namespace WindowsFormsApplication1
 
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
+            Console.WriteLine("Painting");
             foreach (DrawObjects objs in drawObjs)
             {
                 objs.Draw(e.Graphics);

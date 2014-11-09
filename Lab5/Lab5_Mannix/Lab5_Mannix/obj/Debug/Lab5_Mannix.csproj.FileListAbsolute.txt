@@ -1,0 +1,9 @@
+C:\Users\bpusey\Documents\GitHub\c-sharp-practice\Lab5\Lab5_Mannix\Lab5_Mannix\bin\Debug\Lab5_Mannix.exe.config
+C:\Users\bpusey\Documents\GitHub\c-sharp-practice\Lab5\Lab5_Mannix\Lab5_Mannix\obj\Debug\Lab5_Mannix.csprojResolveAssemblyReference.cache
+C:\Users\bpusey\Documents\GitHub\c-sharp-practice\Lab5\Lab5_Mannix\Lab5_Mannix\obj\Debug\Lab5_Mannix.Form1.resources
+C:\Users\bpusey\Documents\GitHub\c-sharp-practice\Lab5\Lab5_Mannix\Lab5_Mannix\obj\Debug\Lab5_Mannix.Properties.Resources.resources
+C:\Users\bpusey\Documents\GitHub\c-sharp-practice\Lab5\Lab5_Mannix\Lab5_Mannix\obj\Debug\Lab5_Mannix.csproj.GenerateResource.Cache
+C:\Users\bpusey\Documents\GitHub\c-sharp-practice\Lab5\Lab5_Mannix\Lab5_Mannix\bin\Debug\Lab5_Mannix.exe
+C:\Users\bpusey\Documents\GitHub\c-sharp-practice\Lab5\Lab5_Mannix\Lab5_Mannix\bin\Debug\Lab5_Mannix.pdb
+C:\Users\bpusey\Documents\GitHub\c-sharp-practice\Lab5\Lab5_Mannix\Lab5_Mannix\obj\Debug\Lab5_Mannix.exe
+C:\Users\bpusey\Documents\GitHub\c-sharp-practice\Lab5\Lab5_Mannix\Lab5_Mannix\obj\Debug\Lab5_Mannix.pdb

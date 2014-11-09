@@ -145,7 +145,7 @@ namespace WindowsFormsApplication1
                     fillColor = System.Drawing.Color.Black;
                     break;
             }
-
+            Console.WriteLine("Drawing");
             System.Drawing.Pen pen = new System.Drawing.Pen(penColor, penWidth);
             switch (drawState)
             {
