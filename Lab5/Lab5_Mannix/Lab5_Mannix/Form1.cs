@@ -117,7 +117,8 @@ namespace Lab5_Mannix
                         {
                             pen = null;
                         }
-                        drawObjs.Add(new Rectangle(pointA, pointB, pen, brush));
+                        if (pen == null && brush == null) { }
+                        else { drawObjs.Add(new Rectangle(pointA, pointB, pen, brush)); }
                         break;
                     case 2:
                         if (fill) {
@@ -127,7 +128,8 @@ namespace Lab5_Mannix
                         {
                             pen = null;
                         }
-                        drawObjs.Add(new Ellipse(pointA, pointB, pen, brush));
+                        if (pen == null && brush == null) { }
+                        else { drawObjs.Add(new Ellipse(pointA, pointB, pen, brush)); }
                         break;
                     case 3:
                         drawObjs.Add(new Text(pointA, pointB, text, new System.Drawing.SolidBrush(penColor)));
