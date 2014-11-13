@@ -13,26 +13,31 @@ namespace WindowsFormsApplication2
         public enum CellSelection { N, O, X };
         private int[,] grid;
         private bool playerWon = false; // This will be set correctly when the game is won
+        private bool gameOver = false;
         public GameEngine(int i)
         {
             this.size = i;
             this.grid = new int[3, 3];
         }
 
-        public bool gameOver()
+        public bool gameOverCheck()
         {
+            bool[] boardFull = new bool[3];
             for (int i = 0; i < this.size; i++)
             {
+                boardFull[i] = (grid[i, 0] > 0) && (grid[i, 1] > 0) && (grid[i, 2] > 0);
                 int row = grid[i, 0] + grid[i, 1] + grid[i, 2];
                 int col = grid[0, i] + grid[1, i] + grid[2, i];
                 if (row == 3 || col == 3)
                 {
                     MessageBox.Show("You lost!");
+                    this.gameOver = true;
                     return true;
                 }
                 else if (row == 12 || col == 12)
                 {
                     this.playerWon = true;
+                    this.gameOver = true;
                     MessageBox.Show("You won!");
                     return true;
                 }
@@ -42,19 +47,27 @@ namespace WindowsFormsApplication2
             if (cross1 == 3 || cross2 == 3)
             {
                 MessageBox.Show("You lost!");
+                this.gameOver = true;
                 return true;
             }
             else if (cross1 == 12 || cross2 == 12)
             {
                 MessageBox.Show("You won!");
                 this.playerWon = true;
+                this.gameOver = true;
                 return true;
+            }
+            if (boardFull[0] && boardFull[1] && boardFull[2])
+            {
+                this.gameOver = true;
+                MessageBox.Show("You tied...");
             }
             return false;
         }
 
         public void clearBoard()
         {
+            this.gameOver = false;
             this.grid = new int[3, 3];
         }
 
@@ -63,13 +76,14 @@ namespace WindowsFormsApplication2
             return this.grid;
         }
 
-        public bool makePlayerMove(int i, int j)
+        public void makePlayerMove(int i, int j)
         {
-            if (this.grid[i, j] != 0) return false;
-            else
+            if (this.grid[i, j] != 0) MessageBox.Show("Illegal Move!");
+            else this.grid[i, j] = 4;
+            this.gameOverCheck();
+            if (!this.gameOver)
             {
-                this.grid[i, j] = 4;
-                return true;
+                this.makeCompMove();
             }
         }
 
@@ -94,6 +108,9 @@ namespace WindowsFormsApplication2
             return this.playerWon;
         }
 
-
+        public bool isGameOver()
+        {
+            return this.gameOver;
+        }
     }
 }

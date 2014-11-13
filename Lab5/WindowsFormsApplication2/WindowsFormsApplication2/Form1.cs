@@ -18,7 +18,6 @@ namespace WindowsFormsApplication2
 	    private const float delta = 5;
         private GameEngine engine = new GameEngine(3);
 	    private float scale;    //current scale factor
-        private Boolean gameOver = false;
         
 	    public Form1()
 	    {
@@ -70,7 +69,7 @@ namespace WindowsFormsApplication2
         
         private void Form1_MouseDown(object sender, MouseEventArgs e)
         {
-            if (!this.gameOver)
+            if (!engine.isGameOver())
             {
                 // All graphics stuff
                 Graphics g = CreateGraphics();
@@ -84,11 +83,16 @@ namespace WindowsFormsApplication2
                 if (i > 2 || j > 2) return;
 
                 // Move handler
-                if (!engine.makePlayerMove(i, j)) { MessageBox.Show("Illegal Move!"); }
+                engine.makePlayerMove(i, j);
                 Invalidate();
-                this.gameOver = engine.gameOver();
-                if (!this.gameOver) { playCompTurn(); }
+                engine.gameOverCheck();
             }
+        }
+
+        private void startNewGame()
+        {
+            engine.clearBoard();
+            Invalidate();
         }
 
         private void NewGame(object sender, EventArgs e)
@@ -96,28 +100,12 @@ namespace WindowsFormsApplication2
             startNewGame();
         }
 
-        private void startNewGame()
-        {
-            this.gameOver = false;
-            engine.clearBoard();
-            Invalidate();
-        }
-
         private void ComputerStarts(object sender, EventArgs e)
         {
-            if (!this.gameOver)
-            {
-                startNewGame();
-                playCompTurn();
-            }
-            
-        }
-
-        private void playCompTurn()
-        {
+            startNewGame();
             engine.makeCompMove();
             Invalidate();
-            this.gameOver = engine.gameOver();
+            engine.gameOverCheck();
         }
     }
 }
