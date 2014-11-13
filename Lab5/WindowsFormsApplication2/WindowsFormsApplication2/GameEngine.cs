@@ -98,16 +98,46 @@ namespace WindowsFormsApplication2
         public void makeCompMove()
         {
             this.gameOverCheck();
+
             // Column and row check
+            for (int i = 0; i < this.size; i++)
+            {
+                if ((this.grid[i, 0] + this.grid[i, 1] + this.grid[i, 2]) == 2) // This means there are exactly 2 spots filled
+                {
+                    for (int j = 0; j < this.size; j++)
+                    {
+                        if (this.grid[i, j] == 0)
+                        {
+                            this.grid[i, j] = 1;
+                            window.Invalidate();
+                            this.gameOverCheck();
+                            return;
+                        }
+                    }
+                }
+                if ((this.grid[0, i] + this.grid[1, i] + this.grid[2, i]) == 2)
+                {
+                    for (int j = 0; j < this.size; j++)
+                    {
+                        if (this.grid[j, i] == 0)
+                        {
+                            this.grid[j, i] = 1;
+                            window.Invalidate();
+                            this.gameOverCheck();
+                            return;
+                        }
+                    }
+                }
+            }
             for (int i = 0; i < this.size; i++)
             {
                 if ((this.grid[i, 0] + this.grid[i, 1] + this.grid[i, 2]) == 8) // This means there are exactly 2 spots filled
                 {
                     for (int j = 0; j < this.size; j++)
                     {
-                        if (this.grid[i, 0] == 0)
+                        if (this.grid[i, j] == 0)
                         {
-                            this.grid[j, i] = 1;
+                            this.grid[i, j] = 1;
                             window.Invalidate();
                             this.gameOverCheck();
                             return;
@@ -129,6 +159,32 @@ namespace WindowsFormsApplication2
                 }
             }
             // Diagonal win check
+            if ((this.grid[0, 0] + this.grid[1, 1] + this.grid[2, 2]) == 2)
+            {
+                for (int i = 0; i < this.size; i++)
+                {
+                    if (this.grid[i, i] == 0)
+                    {
+                        this.grid[i, i] = 1;
+                        window.Invalidate();
+                        this.gameOverCheck();
+                        return;
+                    }
+                }
+            }
+            if ((this.grid[2, 0] + this.grid[1, 1] + this.grid[0, 2]) == 2)
+            {
+                for (int i = 0; i < this.size; i++)
+                {
+                    if (this.grid[this.size - 1 - i, i] == 0)
+                    {
+                        this.grid[this.size - 1 - i, i] = 1;
+                        window.Invalidate();
+                        this.gameOverCheck();
+                        return;
+                    }
+                }
+            }
             if ((this.grid[0, 0] + this.grid[1, 1] + this.grid[2, 2]) == 8)
             {
                 for (int i = 0; i < this.size; i++)
