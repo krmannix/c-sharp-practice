@@ -16,8 +16,6 @@ namespace WindowsFormsApplication2
 	    private const float block = lineLength / 3;
 	    private const float offset = 10;
 	    private const float delta = 5;
-	    private enum CellSelection { N, O, X };
-	    private CellSelection[,] grid=new CellSelection[3,3];
         private GameEngine engine = new GameEngine(3);
 	    private float scale;    //current scale factor
         private Boolean gameOver = false;
@@ -41,12 +39,12 @@ namespace WindowsFormsApplication2
                 block);
             g.DrawLine(Pens.Black, 0, 2*block, lineLength,
                 2*block);
+            int[,] grid = engine.getGrid();
             for (int i = 0; i < 3; ++i)
                 for (int j = 0; j < 3; ++j)
-                    if (grid[i, j] == CellSelection.O) 
+                    if (grid[i, j] == 1) 
                        DrawO(i, j, g);
-                    else if (grid[i, j] == 
-                       CellSelection.X) DrawX(i, j, g);
+                    else if (grid[i, j] == 4) DrawX(i, j, g);
         }
 
         private void ApplyTransform(Graphics g)
@@ -86,35 +84,20 @@ namespace WindowsFormsApplication2
                 if (i > 2 || j > 2) return;
 
                 // Move handler
-                if (engine.makePlayerMove(i, j))
-                {
-                    Console.WriteLine("In here");
-                    grid[i, j] = CellSelection.X;
-                }
-                else { MessageBox.Show("Illegal Move!"); }
+                if (!engine.makePlayerMove(i, j)) { MessageBox.Show("Illegal Move!"); }
                 Invalidate();
-                if (engine.gameOver())
-                {
-                    this.gameOver = true;
-                    if (engine.didPlayerWin())
-                    {
-                        MessageBox.Show("You won!");
-                    }
-                    else
-                    {
-                        MessageBox.Show("You lost!");
-                    }
-                }
-                else
-                {
-                    playCompTurn();
-                }
+                this.gameOver = engine.gameOver();
+                if (!this.gameOver) { playCompTurn(); }
             }
         }
 
         private void NewGame(object sender, EventArgs e)
         {
-            this.grid = new CellSelection[3, 3];
+            startNewGame();
+        }
+
+        private void startNewGame()
+        {
             this.gameOver = false;
             engine.clearBoard();
             Invalidate();
@@ -124,6 +107,7 @@ namespace WindowsFormsApplication2
         {
             if (!this.gameOver)
             {
+                startNewGame();
                 playCompTurn();
             }
             
@@ -131,24 +115,9 @@ namespace WindowsFormsApplication2
 
         private void playCompTurn()
         {
-            int[] k = engine.makeCompMove();
-            if (k != null)
-            {
-                grid[k[0], k[1]] = CellSelection.O;
-            }
+            engine.makeCompMove();
             Invalidate();
-            if (engine.gameOver())
-            {
-                this.gameOver = true;
-                if (engine.didPlayerWin())
-                {
-                    MessageBox.Show("You won!");
-                }
-                else
-                {
-                    MessageBox.Show("You lost!");
-                }
-            }
+            this.gameOver = engine.gameOver();
         }
     }
 }
