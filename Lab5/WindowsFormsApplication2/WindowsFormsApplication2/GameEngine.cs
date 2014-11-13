@@ -15,6 +15,7 @@ namespace WindowsFormsApplication2
         private bool playerWon = false; // This will be set correctly when the game is won
         private bool gameOver = false;
         private Form window;
+        private Random rnd = new Random();
         public GameEngine(Form f, int i)
         {
             this.size = i;
@@ -82,31 +83,92 @@ namespace WindowsFormsApplication2
         public void makePlayerMove(int i, int j)
         {
             if (this.grid[i, j] != 0) MessageBox.Show("Illegal Move!");
-            else this.grid[i, j] = 4;
-            window.Invalidate();
-            this.gameOverCheck();
-            if (!this.gameOver)
+            else
             {
-                this.makeCompMove();
+                this.grid[i, j] = 4;
+                window.Invalidate();
+                this.gameOverCheck();
+                if (!this.gameOver)
+                {
+                    this.makeCompMove();
+                }
             }
         }
 
         public void makeCompMove()
         {
-            // For now, just emulate this stuff. Look for the first open spot
+            this.gameOverCheck();
+            // Column and row check
             for (int i = 0; i < this.size; i++)
             {
-                for (int j = 0; j < this.size; j++)
+                if ((this.grid[i, 0] + this.grid[i, 1] + this.grid[i, 2]) == 8) // This means there are exactly 2 spots filled
                 {
-                    if (this.grid[j, i] == 0)
+                    for (int j = 0; j < this.size; j++)
                     {
-                        this.grid[j, i] = 1;
+                        if (this.grid[i, 0] == 0)
+                        {
+                            this.grid[j, i] = 1;
+                            window.Invalidate();
+                            this.gameOverCheck();
+                            return;
+                        }
+                    }
+                }
+                if ((this.grid[0, i] + this.grid[1, i] + this.grid[2, i]) == 8)
+                {
+                    for (int j = 0; j < this.size; j++)
+                    {
+                        if (this.grid[j, i] == 0)
+                        {
+                            this.grid[j, i] = 1;
+                            window.Invalidate();
+                            this.gameOverCheck();
+                            return;
+                        }
+                    }
+                }
+            }
+            // Diagonal win check
+            if ((this.grid[0, 0] + this.grid[1, 1] + this.grid[2, 2]) == 8)
+            {
+                for (int i = 0; i < this.size; i++)
+                {
+                    if (this.grid[i, i] == 0)
+                    {
+                        this.grid[i, i] = 1;
                         window.Invalidate();
                         this.gameOverCheck();
                         return;
                     }
                 }
             }
+            if ((this.grid[2, 0] + this.grid[1, 1] + this.grid[0, 2]) == 8)
+            {
+                for (int i = 0; i < this.size; i++)
+                {
+                    if (this.grid[this.size - 1 - i, i] == 0)
+                    {
+                        this.grid[this.size - 1 - i, i] = 1;
+                        window.Invalidate();
+                        this.gameOverCheck();
+                        return;
+                    }
+                }
+            }
+            // Now, randomly choose a spot.
+            int k = 0, h = 0;
+            do
+            {
+                int n = rnd.Next(0, 9);
+                k = n / 3;
+                h = n % 3;
+                if (this.grid[k, h] == 0)
+                {
+                    this.grid[k, h] = 1;
+                    this.gameOverCheck();
+                    return;
+                }
+            } while (true);
         }
 
         public bool didPlayerWin()
