@@ -7,3 +7,6 @@ C:\Users\bpusey\Documents\GitHub\c-sharp-practice\Lab5\WindowsFormsApplication2\
 C:\Users\bpusey\Documents\GitHub\c-sharp-practice\Lab5\WindowsFormsApplication2\WindowsFormsApplication2\obj\Debug\WindowsFormsApplication2.exe
 C:\Users\bpusey\Documents\GitHub\c-sharp-practice\Lab5\WindowsFormsApplication2\WindowsFormsApplication2\obj\Debug\WindowsFormsApplication2.pdb
 C:\Users\bpusey\Documents\GitHub\c-sharp-practice\Lab5\WindowsFormsApplication2\WindowsFormsApplication2\obj\Debug\WindowsFormsApplication2.Form1.resources
+C:\Users\bpusey\Documents\GitHub\c-sharp-practice\Lab6\WindowsFormsApplication2\bin\Debug\WindowsFormsApplication2.exe.config
+C:\Users\bpusey\Documents\GitHub\c-sharp-practice\Lab6\WindowsFormsApplication2\obj\Debug\WindowsFormsApplication2.exe
+C:\Users\bpusey\Documents\GitHub\c-sharp-practice\Lab6\WindowsFormsApplication2\obj\Debug\WindowsFormsApplication2.pdb
