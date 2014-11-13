@@ -5,19 +5,21 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace WindowsFormsApplication2
 {
     class GameEngine
     {
         int size;
-        public enum CellSelection { N, O, X };
         private int[,] grid;
         private bool playerWon = false; // This will be set correctly when the game is won
         private bool gameOver = false;
-        public GameEngine(int i)
+        private Form window;
+        public GameEngine(Form f, int i)
         {
             this.size = i;
             this.grid = new int[3, 3];
+            this.window = f;
         }
 
         public bool gameOverCheck()
@@ -69,6 +71,7 @@ namespace WindowsFormsApplication2
         {
             this.gameOver = false;
             this.grid = new int[3, 3];
+            window.Invalidate();
         }
 
         public int[,] getGrid()
@@ -80,6 +83,7 @@ namespace WindowsFormsApplication2
         {
             if (this.grid[i, j] != 0) MessageBox.Show("Illegal Move!");
             else this.grid[i, j] = 4;
+            window.Invalidate();
             this.gameOverCheck();
             if (!this.gameOver)
             {
@@ -97,6 +101,8 @@ namespace WindowsFormsApplication2
                     if (this.grid[j, i] == 0)
                     {
                         this.grid[j, i] = 1;
+                        window.Invalidate();
+                        this.gameOverCheck();
                         return;
                     }
                 }

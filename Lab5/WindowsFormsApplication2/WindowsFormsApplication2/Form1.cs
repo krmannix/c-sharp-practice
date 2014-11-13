@@ -16,11 +16,12 @@ namespace WindowsFormsApplication2
 	    private const float block = lineLength / 3;
 	    private const float offset = 10;
 	    private const float delta = 5;
-        private GameEngine engine = new GameEngine(3);
+        private GameEngine engine;
 	    private float scale;    //current scale factor
         
 	    public Form1()
 	    {
+            engine = new GameEngine(this, 3);
 	    	InitializeComponent();
 	    	ResizeRedraw = true;
         }
@@ -84,15 +85,12 @@ namespace WindowsFormsApplication2
 
                 // Move handler
                 engine.makePlayerMove(i, j);
-                Invalidate();
-                engine.gameOverCheck();
             }
         }
 
         private void startNewGame()
         {
             engine.clearBoard();
-            Invalidate();
         }
 
         private void NewGame(object sender, EventArgs e)
@@ -104,8 +102,6 @@ namespace WindowsFormsApplication2
         {
             startNewGame();
             engine.makeCompMove();
-            Invalidate();
-            engine.gameOverCheck();
         }
     }
 }
