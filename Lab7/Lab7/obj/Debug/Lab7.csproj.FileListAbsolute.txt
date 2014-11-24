@@ -1,0 +1,9 @@
+C:\Users\bpusey\Documents\GitHub\c-sharp-practice\Lab7\Lab7\bin\Debug\Lab7.exe.config
+C:\Users\bpusey\Documents\GitHub\c-sharp-practice\Lab7\Lab7\bin\Debug\Lab7.exe
+C:\Users\bpusey\Documents\GitHub\c-sharp-practice\Lab7\Lab7\bin\Debug\Lab7.pdb
+C:\Users\bpusey\Documents\GitHub\c-sharp-practice\Lab7\Lab7\obj\Debug\Lab7.csprojResolveAssemblyReference.cache
+C:\Users\bpusey\Documents\GitHub\c-sharp-practice\Lab7\Lab7\obj\Debug\Lab7.Form1.resources
+C:\Users\bpusey\Documents\GitHub\c-sharp-practice\Lab7\Lab7\obj\Debug\Lab7.Properties.Resources.resources
+C:\Users\bpusey\Documents\GitHub\c-sharp-practice\Lab7\Lab7\obj\Debug\Lab7.csproj.GenerateResource.Cache
+C:\Users\bpusey\Documents\GitHub\c-sharp-practice\Lab7\Lab7\obj\Debug\Lab7.exe
+C:\Users\bpusey\Documents\GitHub\c-sharp-practice\Lab7\Lab7\obj\Debug\Lab7.pdb
