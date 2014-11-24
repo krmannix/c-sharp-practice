@@ -83,6 +83,12 @@ namespace Lab7
 
         /* * * * * * * * * * * * * * *
          * 
+         * Helper Methods
+         * 
+         * * * * * * * * * * * * * * */
+
+        /* * * * * * * * * * * * * * *
+         * 
          * Correctness Checks
          * 
          * * * * * * * * * * * * * * */
@@ -109,6 +115,48 @@ namespace Lab7
             }
             else return true;
             
+        }
+
+        private bool checkPathExists()
+        {
+            if (File.Exists(filePathText)) { return true; }
+            MessageBox.Show("File does not exist.",
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error,
+                    MessageBoxDefaultButton.Button1);
+            return false;
+
+        }
+
+        private bool checkForDESFileExtension()
+        {
+            if (Path.GetExtension(filePathText) != ".des")
+            {
+                MessageBox.Show("Cennot decrypt non-.des file.",
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error,
+                    MessageBoxDefaultButton.Button1); 
+                return false;
+            }
+            else return true;
+        }
+
+        private bool checkForOverwriteFile()
+        {
+            if (File.Exists(Path.ChangeExtension(filePathText, null)))
+            {
+                var result = MessageBox.Show("File already exists. Overwrite?",
+                    "Error",
+                    MessageBoxButtons.YesNoCancel,
+                    MessageBoxIcon.Error,
+                    MessageBoxDefaultButton.Button1);
+
+                if (result == DialogResult.Yes) return true;
+                else return false;
+            }
+            return true;
         }
 
     }
