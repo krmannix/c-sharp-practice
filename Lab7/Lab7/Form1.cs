@@ -30,19 +30,52 @@ namespace Lab7
 
         private void encryptButton_Click(object sender, EventArgs e)
         {
-            if(textInputsValid() && checkPathExists()) {
-                string text = File.ReadAllText(filePathText);
-                int size = text.Length;
-                byte[] key = createByteArray();
-                byte[] encrypted = EncryptStringToBytes(text, key, key);
+            if (textInputsValid() && checkPathExists() && checkForOverwriteFile(true))
+            {
+                try
+                {
+                    string filePath = filePathText;
+                    string text = File.ReadAllText(filePath);
+                    int size = text.Length;
+                    byte[] key = createByteArray();
+                    byte[] encrypted = EncryptStringToBytes(text, key, key);
+                    saveEncryptedFile(encrypted, filePath);
+                    //resetTextBoxes();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.ToString());
+                    MessageBox.Show("Could not open source of destination file.",
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error,
+                    MessageBoxDefaultButton.Button1);
+                }
+                
             }
         }
 
         private void decryptButton_Click(object sender, EventArgs e)
         {
-            if (textInputsValid() && checkPathExists() && checkForDESFileExtension() && checkForOverwriteFile()                     )
+            if (checkForDESFileExtension() && textInputsValid() && checkPathExists() && checkForOverwriteFile(false)                    )
             {
-
+                try
+                {
+                    string filePath = filePathText;
+                    byte[] key = createByteArray();
+                    String de = DecryptStringFromBytes(readEncryptedFile(filePath), key, key);
+                    saveDecryptedFile(de, filePath);
+                    //resetTextBoxes();
+                }
+                catch (Exception c)
+                {
+                    Console.WriteLine(c.ToString());
+                    MessageBox.Show("Could not open source of destination file.",
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error,
+                    MessageBoxDefaultButton.Button1);
+                }
             }
         }
 
@@ -89,13 +122,19 @@ namespace Lab7
          * 
          * * * * * * * * * * * * * * */
 
+        private void resetTextBoxes()
+        {
+            fileNameInput.Text = "";
+            keyInput.Text = "";
+        }
+
         private byte[] createByteArray()
         {
             byte[] byteArr = new byte[8];
-            char[] key_temp = keyText.ToCharArray();
+            char[] key_temp = this.keyText.ToCharArray();
             for (int i = 0; i < key_temp.Length; i++)
             {
-                byte c = (byte) (Convert.ToUInt16(key_temp[0]) >> 8);
+                byte c = (byte) key_temp[i];
                 byteArr[i % 8] = (byte) (byteArr[i % 8] + c); 
             }
             return byteArr;
@@ -113,7 +152,7 @@ namespace Lab7
             byte[] encrypted;
             // Create an TripleDESCryptoServiceProvider object 
             // with the specified key and IV. 
-            using (TripleDESCryptoServiceProvider tdsAlg = new TripleDESCryptoServiceProvider())
+            using (DESCryptoServiceProvider tdsAlg = new DESCryptoServiceProvider())
             {
                 tdsAlg.Key = Key;
                 tdsAlg.IV = IV;
@@ -128,7 +167,6 @@ namespace Lab7
                     {
                         using (StreamWriter swEncrypt = new StreamWriter(csEncrypt))
                         {
-
                             //Write all data to the stream.
                             swEncrypt.Write(plainText);
                         }
@@ -159,7 +197,7 @@ namespace Lab7
 
             // Create an TripleDESCryptoServiceProvider object 
             // with the specified key and IV. 
-            using (TripleDESCryptoServiceProvider tdsAlg = new TripleDESCryptoServiceProvider())
+            using (DESCryptoServiceProvider tdsAlg = new DESCryptoServiceProvider())
             {
                 tdsAlg.Key = Key;
                 tdsAlg.IV = IV;
@@ -190,8 +228,19 @@ namespace Lab7
 
         private void saveEncryptedFile(byte[] bArr, String path)
         {
-            String newFilePath = Path.ChangeExtension(path, Path.GetExtension(path) + ".des");
+            String newFilePath = path + ".des";
             File.WriteAllBytes(newFilePath, bArr);
+        }
+
+        private void saveDecryptedFile(String file, String path)
+        {
+            path = path.Remove(path.Length - 3); // remove .des
+            File.WriteAllText(path, file);
+        }
+
+        private byte[] readEncryptedFile(String path)
+        {
+            return File.ReadAllBytes(path);
         }
 
         /* * * * * * * * * * * * * * *
@@ -202,16 +251,7 @@ namespace Lab7
 
         private bool textInputsValid()
         {
-            if (filePathText == "")
-            {
-                MessageBox.Show("Please enter a file path.",
-                    "Error",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error,
-                    MessageBoxDefaultButton.Button1); 
-                return false;
-            }
-            else if (keyText == "")
+            if (this.keyText == "")
             {
                 MessageBox.Show("Please enter a key.",
                     "Error",
@@ -226,8 +266,8 @@ namespace Lab7
 
         private bool checkPathExists()
         {
-            if (File.Exists(filePathText)) { return true; }
-            MessageBox.Show("File does not exist.",
+            if (File.Exists(this.filePathText)) { return true; }
+            MessageBox.Show("Could not open source of destination file.",
                     "Error",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error,
@@ -240,7 +280,7 @@ namespace Lab7
         {
             if (Path.GetExtension(filePathText) != ".des")
             {
-                MessageBox.Show("Cennot decrypt non-.des file.",
+                MessageBox.Show("Not a .des file.",
                     "Error",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error,
@@ -250,14 +290,17 @@ namespace Lab7
             else return true;
         }
 
-        private bool checkForOverwriteFile()
+        private bool checkForOverwriteFile(bool addDES)
         {
-            if (File.Exists(Path.ChangeExtension(filePathText, null)))
+            String filePath;
+            if (addDES) filePath = this.filePathText + ".des";
+            else filePath = this.filePathText.Remove(this.filePathText.Length - 3);
+            if (File.Exists(filePath))
             {
-                var result = MessageBox.Show("File already exists. Overwrite?",
+                var result = MessageBox.Show("Output file exists. Overwrite?",
                     "Error",
-                    MessageBoxButtons.YesNoCancel,
-                    MessageBoxIcon.Error,
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Information,
                     MessageBoxDefaultButton.Button1);
 
                 if (result == DialogResult.Yes) return true;
