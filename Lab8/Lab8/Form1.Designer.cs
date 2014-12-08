@@ -63,6 +63,7 @@
             this.saveCollectionToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F)));
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
             // 
@@ -161,7 +162,6 @@
             // saveFileDialog1
             // 
             this.saveFileDialog1.DefaultExt = "pix";
-            this.saveFileDialog1.FileName = "PictureCollection1";
             // 
             // Form1
             // 

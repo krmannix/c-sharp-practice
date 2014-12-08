@@ -51,7 +51,29 @@ namespace Lab8
         {
             listBox1.Items.Clear();
             // Then add all the items
+            openFileDialog1.Filter = "*.pix|*.pix";
+            openFileDialog1.FilterIndex = 2;
 
+            DialogResult result = openFileDialog1.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                String fileName = openFileDialog1.FileName;
+                String line;
+                try
+                {
+                    StreamReader file = new StreamReader(fileName);
+                    while ((line = file.ReadLine()) != null)
+                    {
+                        listBox1.Items.Add(line);
+                    }
+                    file.Close();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("File does not exist.", "Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
 
         private void saveCollectionToolStripMenuItem_Click(object sender, EventArgs e)
@@ -59,7 +81,6 @@ namespace Lab8
             if (listBox1.Items.Count == 0)
                 MessageBox.Show("No files to save.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
             else {
-                SaveFileDialog saveFileDialog1 = new SaveFileDialog();
                 saveFileDialog1.Filter = "*.pix|*.pix";
                 saveFileDialog1.FilterIndex = 2;
                 saveFileDialog1.RestoreDirectory = true;
@@ -67,16 +88,23 @@ namespace Lab8
                 if (saveFileDialog1.ShowDialog() == DialogResult.OK)
                 {
                     String filePath = getSaveExtension();
-                    Console.WriteLine(filePath);
                     String file = "";
                     foreach (string line in listBox1.Items)
                     {
                         file += line + "\n";
                     }
-                    using (Stream s = File.Open(filePath, FileMode.CreateNew))
-                    using (TextWriter sw = new StreamWriter(s))
+                    try
                     {
-                        sw.Write(file);
+                        using (Stream s = File.Open(filePath, FileMode.CreateNew))
+                        using (TextWriter sw = new StreamWriter(s))
+                        {
+                            sw.Write(file);
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("File does not exist.", "Error",
+                            MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
