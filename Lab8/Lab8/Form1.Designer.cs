@@ -30,16 +30,18 @@
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.addButton = new System.Windows.Forms.Button();
-            this.deleteButton = new System.Windows.Forms.Button();
-            this.showButton = new System.Windows.Forms.Button();
-            this.intervalInput = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.openCollectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveCollectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.deleteButton = new System.Windows.Forms.Button();
+            this.addButton = new System.Windows.Forms.Button();
+            this.showButton = new System.Windows.Forms.Button();
+            this.intervalInput = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.listBox1 = new System.Windows.Forms.ListBox();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -64,6 +66,27 @@
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
             // 
+            // openCollectionToolStripMenuItem
+            // 
+            this.openCollectionToolStripMenuItem.Name = "openCollectionToolStripMenuItem";
+            this.openCollectionToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.openCollectionToolStripMenuItem.Text = "Open Collection";
+            this.openCollectionToolStripMenuItem.Click += new System.EventHandler(this.openCollectionToolStripMenuItem_Click);
+            // 
+            // saveCollectionToolStripMenuItem
+            // 
+            this.saveCollectionToolStripMenuItem.Name = "saveCollectionToolStripMenuItem";
+            this.saveCollectionToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.saveCollectionToolStripMenuItem.Text = "Save Collection";
+            this.saveCollectionToolStripMenuItem.Click += new System.EventHandler(this.saveCollectionToolStripMenuItem_Click);
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.deleteButton);
@@ -75,15 +98,6 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Files";
             // 
-            // addButton
-            // 
-            this.addButton.Location = new System.Drawing.Point(14, 28);
-            this.addButton.Name = "addButton";
-            this.addButton.Size = new System.Drawing.Size(75, 23);
-            this.addButton.TabIndex = 0;
-            this.addButton.Text = "Add";
-            this.addButton.UseVisualStyleBackColor = true;
-            // 
             // deleteButton
             // 
             this.deleteButton.Location = new System.Drawing.Point(142, 28);
@@ -92,6 +106,17 @@
             this.deleteButton.TabIndex = 1;
             this.deleteButton.Text = "Delete";
             this.deleteButton.UseVisualStyleBackColor = true;
+            this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
+            // 
+            // addButton
+            // 
+            this.addButton.Location = new System.Drawing.Point(14, 28);
+            this.addButton.Name = "addButton";
+            this.addButton.Size = new System.Drawing.Size(75, 23);
+            this.addButton.TabIndex = 0;
+            this.addButton.Text = "Add";
+            this.addButton.UseVisualStyleBackColor = true;
+            this.addButton.Click += new System.EventHandler(this.addButton_Click);
             // 
             // showButton
             // 
@@ -101,6 +126,7 @@
             this.showButton.TabIndex = 2;
             this.showButton.Text = "Show";
             this.showButton.UseVisualStyleBackColor = true;
+            this.showButton.Click += new System.EventHandler(this.showButton_Click);
             // 
             // intervalInput
             // 
@@ -108,6 +134,7 @@
             this.intervalInput.Name = "intervalInput";
             this.intervalInput.Size = new System.Drawing.Size(48, 20);
             this.intervalInput.TabIndex = 3;
+            this.intervalInput.Text = "5";
             // 
             // label1
             // 
@@ -118,31 +145,23 @@
             this.label1.TabIndex = 4;
             this.label1.Text = "Interval";
             // 
-            // openCollectionToolStripMenuItem
-            // 
-            this.openCollectionToolStripMenuItem.Name = "openCollectionToolStripMenuItem";
-            this.openCollectionToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
-            this.openCollectionToolStripMenuItem.Text = "Open Collection";
-            // 
-            // saveCollectionToolStripMenuItem
-            // 
-            this.saveCollectionToolStripMenuItem.Name = "saveCollectionToolStripMenuItem";
-            this.saveCollectionToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
-            this.saveCollectionToolStripMenuItem.Text = "Save Collection";
-            // 
-            // exitToolStripMenuItem
-            // 
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
-            this.exitToolStripMenuItem.Text = "Exit";
-            // 
             // listBox1
             // 
             this.listBox1.FormattingEnabled = true;
             this.listBox1.Location = new System.Drawing.Point(41, 39);
             this.listBox1.Name = "listBox1";
+            this.listBox1.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.listBox1.Size = new System.Drawing.Size(467, 69);
             this.listBox1.TabIndex = 5;
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // saveFileDialog1
+            // 
+            this.saveFileDialog1.DefaultExt = "pix";
+            this.saveFileDialog1.FileName = "PictureCollection1";
             // 
             // Form1
             // 
@@ -180,6 +199,8 @@
         private System.Windows.Forms.TextBox intervalInput;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
     }
 }
 
