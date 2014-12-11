@@ -23,6 +23,8 @@ namespace Lab8
         private void addButton_Click(object sender, EventArgs e)
         {
             // Get the dialog and add to the listbox
+            openFileDialog1.Filter = "*.jpg;*.gif;*.png;*.bmp|*.jpg;*.gif;*.png;*.bmp|*.* (All Files)|*.*";
+            openFileDialog1.FilterIndex = 1;
             DialogResult result = openFileDialog1.ShowDialog();
             if (result == DialogResult.OK) listBox1.Items.Add(openFileDialog1.FileName);
         }

@@ -53,6 +53,7 @@ namespace Lab8
             String filePath = (String) this.files[0];
             this.files.RemoveAt(0);
             pictureBox1.Dock = DockStyle.Fill;
+            
             setPictureBox(filePath);
             timer1.Start();
         }
@@ -64,7 +65,19 @@ namespace Lab8
 
         private void setPictureBox(String fileName)
         {
-            pictureBox1.Image = new Bitmap(fileName);
+            String ext = System.IO.Path.GetExtension(fileName);
+            if (ext == null)
+            {
+                pictureBox1.Image = Properties.Resources.win_default;
+            }
+            else if (ext == ".jpg" || ext == ".gif" || ext == ".png" || ext == ".bmp")
+            {
+                pictureBox1.Image = new Bitmap(fileName);
+            }
+            else
+            {
+                pictureBox1.Image = Properties.Resources.win_default;
+            }
         }
     }
 }

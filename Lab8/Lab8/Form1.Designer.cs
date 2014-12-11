@@ -133,6 +133,7 @@
             // 
             this.intervalInput.Location = new System.Drawing.Point(416, 216);
             this.intervalInput.Name = "intervalInput";
+            this.intervalInput.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.intervalInput.Size = new System.Drawing.Size(48, 20);
             this.intervalInput.TabIndex = 3;
             this.intervalInput.Text = "5";
