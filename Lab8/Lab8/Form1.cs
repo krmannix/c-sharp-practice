@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -42,7 +43,14 @@ namespace Lab8
                 int interval = checkInterval();
                 if (interval > 0)
                 {
-
+                    // Go through strings
+                    ArrayList files = new ArrayList();
+                    foreach (string s in listBox1.Items)
+                    {
+                        files.Add(s);
+                    }
+                    Form2 form = new Form2(files, interval) { Owner = this };
+                    form.ShowDialog();
                 }
             }
         }

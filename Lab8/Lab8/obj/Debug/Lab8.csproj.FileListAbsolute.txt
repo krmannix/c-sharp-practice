@@ -7,3 +7,4 @@ C:\Users\bpusey\Documents\GitHub\c-sharp-practice\Lab8\Lab8\obj\Debug\Lab8.Prope
 C:\Users\bpusey\Documents\GitHub\c-sharp-practice\Lab8\Lab8\obj\Debug\Lab8.csproj.GenerateResource.Cache
 C:\Users\bpusey\Documents\GitHub\c-sharp-practice\Lab8\Lab8\obj\Debug\Lab8.exe
 C:\Users\bpusey\Documents\GitHub\c-sharp-practice\Lab8\Lab8\obj\Debug\Lab8.pdb
+C:\Users\bpusey\Documents\GitHub\c-sharp-practice\Lab8\Lab8\obj\Debug\Lab8.Form2.resources
